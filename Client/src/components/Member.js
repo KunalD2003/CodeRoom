@@ -4,7 +4,7 @@ const Member = (props) => {
   return (
     <div className='client'> 
       <Avatar name={props.username} size={40} round="10px" />
-      <span>{props.username}</span>
+      <span style={{marginLeft: "0.5rem"}}>{props.username}</span>
     </div>
   )
 }

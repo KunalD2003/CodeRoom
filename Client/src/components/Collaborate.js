@@ -62,7 +62,7 @@ const Collaborate = () => {
     };
     return (
         <Container fluid className="collaborate-container">
-            <Row>
+            <Row className="collaborate-row">
                 <Col md={3} className="left-side p-4">
                     <h2 className="text-light mb-4">Code-Syncronix</h2>
                     <h4 className="text-light">Connected Users</h4>
