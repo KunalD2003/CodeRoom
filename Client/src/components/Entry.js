@@ -14,36 +14,44 @@ function Entry() {
 
   const CreateRoom = (e) => {
     e.preventDefault();
+    if (!userName.trim()) {
+      toast.error("UserName is required!");
+      return;
+    }
     const id = v4();
     setRoomId(id);
     navigate(`/Collaborate/${id}`, {
       state: {
         userName, roomId: id,
       },
-    })
+    });
     toast.success("New Room Created ");
   }
 
   const JoinRoom = (e) => {
-    if (!userName) {
-      e.preventDefault();
+    e.preventDefault();
+    if (!userName.trim()) {
       toast.error("UserName is required!");
-    } else {
-      setShowRoomIdInput(true);
+      return;
     }
+    setShowRoomIdInput(true);
   }
 
   const EnterRoom = (e) => {
-    if (!roomId) {
-      e.preventDefault();
-      toast.error("Room Id is required!");
-    } else {
-      navigate(`/Collaborate/${roomId}`, {
-        state: {
-          userName, roomId,
-        },
-      })
+    e.preventDefault();
+    if (!userName.trim()) {
+      toast.error("UserName is required!");
+      return;
     }
+    if (!roomId.trim()) {
+      toast.error("Room Id is required!");
+      return;
+    }
+    navigate(`/Collaborate/${roomId}`, {
+      state: {
+        userName, roomId,
+      },
+    });
   }
 
   const ForEnter = (e) => {
@@ -63,7 +71,13 @@ function Entry() {
         <img src={logo} alt="Code Syncronix Logo" className='logo' />
         <form className='input-form'>
           <div className='input-container'>
-            <input className='entry-input' placeholder='Username' value={userName} onChange={(e) => { setUserName(e.target.value) }} onKeyUp={ForEnter} />
+            <input
+              className='entry-input'
+              placeholder='Username'
+              value={userName}
+              onChange={(e) => { setUserName(e.target.value) }}
+              onKeyUp={ForEnter}
+            />
             <i className='bx bx-user input-icon'></i>
           </div>
           {showRoomIdInput && (
@@ -71,7 +85,9 @@ function Entry() {
               <input
                 className='entry-input'
                 placeholder='Room Id'
-                onChange={(e) => { setRoomId(e.target.value) }} value={roomId} onKeyUp={ForEnter}
+                value={roomId}
+                onChange={(e) => { setRoomId(e.target.value) }}
+                onKeyUp={ForEnter}
               />
               <i className='bx bx-copy input-icon' onClick={handleCopyRoomId}></i>
             </div>
