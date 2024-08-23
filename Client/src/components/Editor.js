@@ -71,14 +71,25 @@ const Editor = ({ socketref, roomId, onCode }) => {
     };
 
     const getData = async () => {
-        const code = {
-            code: editorRef.current.getValue(),
-            input: document.getElementById('input').value,
-            lang: document.getElementById("option").value,
-        };
-        const resp = await axios.post("http://localhost:5000/api/Collaborate", code);
-        setOutputData(resp.data.output);
+        try {
+            const code = {
+                code: editorRef.current.getValue(),
+                input: document.getElementById('input').value,
+                lang: document.getElementById("option").value,
+            };
+            const resp = await axios.post("http://localhost:5000/api/Collaborate", code);
+    
+            if (resp.data.error) {
+                setOutputData(resp.data.error);  // Display error if present
+            } else {
+                setOutputData(resp.data.output); // Display output on successful compilation
+            }
+        } catch (error) {
+            console.error('Error during compilation:', error);
+            setOutputData('Error during compilation. Please check your code and try again.');
+        }
     };
+    
 
     const handleMouseDown = (e) => {
         isResizing.current = true;

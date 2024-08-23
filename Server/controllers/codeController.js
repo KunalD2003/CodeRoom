@@ -7,8 +7,9 @@ const compileCode = async (req, res) => {
     res.send(result);
   } catch (error) {
     console.error('Compilation error:', error);
-    res.status(500).send({ output: 'Internal Server Error' });
+    res.status(500).send({ output: error.output || 'Internal Server Error' });
   }
 };
+
 
 module.exports = { compileCode };
