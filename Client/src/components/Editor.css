@@ -71,6 +71,7 @@ textarea#realtimeEditor {
     cursor: pointer;
     color: white;
     font-weight: bold;
+    margin-right: 20px;
 }
 
 .output-field, 
