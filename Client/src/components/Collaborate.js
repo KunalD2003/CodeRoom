@@ -6,6 +6,8 @@ import Editor from "./Editor";
 import { socketIo } from "./socket";
 import toast from 'react-hot-toast';
 import './Collaborate.css';
+import logo from '../assets/images/icon.png';
+
 const Collaborate = () => {
     const [members, setMembers] = useState([]);
     const location = useLocation();
@@ -64,7 +66,7 @@ const Collaborate = () => {
         <Container fluid className="collaborate-container">
             <Row className="collaborate-row">
                 <Col md={3} className="left-side p-4">
-                    <h2 className="text-light mb-4">Code-Syncronix</h2>
+                    <img src={logo} alt="Code Syncronix Logo" className='collborate-logo' />
                     <h4 className="text-light">Connected Users</h4>
                     <div className="members-list">
                         {members.map((member) => (
