@@ -1,0 +1,39 @@
+.editor-container {
+    display: flex;
+    height: 100%;
+}
+.editor-col {
+    padding: 0;
+}
+.control-panel {
+    background-color: #2D2D2D;
+    color: white;
+}
+textarea#realtimeEditor {
+    width: 100%;
+    height: calc(100vh - 20px);
+    font-size: 16px;
+    line-height: 1.5;
+}
+.run-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #28A745;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+}
+.output-field {
+    background-color: #1E1E1E;
+    color: white;
+    border: 1px solid #4B4B4B;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+
+
+

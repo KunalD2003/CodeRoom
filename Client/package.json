@@ -1,0 +1,62 @@
+{
+  "name": "codesyncronix",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@codemirror/lang-javascript": "^6.2.1",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@monaco-editor/react": "^4.5.2",
+    "@mui/material": "^5.14.10",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@uiw/codemirror-theme-vscode": "^4.21.13",
+    "axios": "^1.5.0",
+    "babel-plugin-macros": "^3.1.0",
+    "bootstrap": "^5.3.3",
+    "codemirror": "^5.65.11",
+    "concurrently": "^8.2.1",
+    "react": "^18.2.0",
+    "react-avatar": "^5.0.3",
+    "react-bootstrap": "^2.10.4",
+    "react-copy-to-clipboard": "^5.1.0",
+    "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.4.1",
+    "react-icons": "^4.11.0",
+    "react-router-dom": "^6.16.0",
+    "react-scripts": "5.0.1",
+    "socket.io-client": "^4.7.2",
+    "uuid": "^9.0.1",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "npm run build && npm run server:prod",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "server:prod": "node ../Server/server.js",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC"
+}

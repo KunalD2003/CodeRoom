@@ -1,0 +1,112 @@
+:root {
+  /* Sizes */
+  --font1: 50px; /* h1 */
+  --font2: 40px; /* h2 */
+  --font3: 32px; /* h3 */
+  --font4: 22px; /* h4 */
+  --font5: 20px; /* h5 */
+  --font6: 16px; /* h6 */
+  --font7: 18px; /* a */
+  --font8: 14px; /* p */
+  
+  /* Colors */
+  --primarycolor: #01428C;
+  --secondarycolor: #104242;
+  --whitecolor: #fff;
+  --iconscolor: #673FE9;
+  --greycolor: #b0bac7;
+}
+
+/* @font-face{
+  font-family: "bold";
+  src: url(./assets/font/BrunoAce-Regular.ttf);
+  font-weight: 900;
+}
+@font-face{
+  font-family: "semibold";
+  src: url(./assets/font/BrunoAce-Regular.ttf);
+  font-weight: 800;
+}
+@font-face{
+  font-family: "medium";
+  src: url(./assets/font/BrunoAce-Regular.ttf);
+  font-weight: 700;
+}
+@font-face{
+  font-family: "regular";
+  src: url(./assets/font/BrunoAce-Regular.ttf);
+  font-weight: 900;
+}
+@font-face{
+  font-family: "light";
+  src: url(./assets/font/BrunoAce-Regular.ttf);
+  font-weight: 900;
+} */
+
+h1 {
+  font-family: "bold";
+  font-size: clamp(var(--font8), calc(3.0vw + var(--font8)), var(--font1)) !important;
+}
+h2 {
+  font-family: "bold";
+  font-size: clamp(var(--font8), calc(3.0vw + var(--font8)), var(--font2)) !important;
+}
+h3 {
+  font-family: "semibold";
+  font-size: clamp(var(--font8), calc(3.0vw + var(--font8)), var(--font3)) !important;
+}
+h4 {
+  font-family: "semibold";
+  font-size: clamp(var(--font8), calc(3.0vw + var(--font8)), var(--font4)) !important;
+}
+h5 {
+  font-family: "medium";
+  font-size: clamp(var(--font8), calc(3.0vw + var(--font8)), var(--font5)) !important;
+}
+h6 {
+  font-family: "regular";
+  font-size: clamp(var(--font8), calc(0.375vw + var(--font8)), var(--font6)) !important;
+}
+a {
+  font-family: "regular";
+  font-size: clamp(var(--font8), calc(2.0vw + var(--font8)), var(--font7)) !important;
+}
+p {
+  font-family: "medium";
+  font-size: clamp(var(--font8), calc(2.0vw + var(--font8)), var(--font8)) !important;
+}
+.lightfont {
+  font-family: "light";
+  font-size: clamp(var(--font8), calc(1.5vw + var(--font8)), var(--font8)) !important; 
+}
+
+
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+*:after,
+*:before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+
+@media (min-width: 1200px) {
+  .container-xl, .container-lg, .container-md, .container-sm, .container {
+      max-width: 1300px !important;
+  }
+}
+@media (min-width: 992px) {
+  .container-lg, .container-md, .container-sm, .container {
+      max-width: 1230px !important;
+  }
+}
+@media (max-width: 991px) {
+  .container-xl, .container-lg, .container-md, .container-sm, .container{
+      max-width: 940px !important;
+  }
+}
