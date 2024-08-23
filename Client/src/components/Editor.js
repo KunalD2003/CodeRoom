@@ -15,6 +15,10 @@ import { Row, Col, Button, Form } from "react-bootstrap";
 const Editor = ({ socketref, roomId, onCode }) => {
     const [outputData, setOutputData] = useState("");
     const editorRef = useRef(null);
+    const controlPanelRef = useRef(null);
+    const isResizing = useRef(false);
+    const startY = useRef(0);
+    const startHeight = useRef(0);
 
     useEffect(() => {
         editorRef.current = Codemirror.fromTextArea(
@@ -35,6 +39,14 @@ const Editor = ({ socketref, roomId, onCode }) => {
                 socketref.current.emit('code-change', { roomId, myCode });
             }
         });
+
+        // Adjust editor size on load
+        adjustEditorHeight();
+        window.addEventListener('resize', adjustEditorHeight);
+
+        return () => {
+            window.removeEventListener('resize', adjustEditorHeight);
+        };
     }, []);
 
     useEffect(() => {
@@ -68,6 +80,36 @@ const Editor = ({ socketref, roomId, onCode }) => {
         setOutputData(resp.data.output);
     };
 
+    const handleMouseDown = (e) => {
+        isResizing.current = true;
+        startY.current = e.clientY;
+        startHeight.current = controlPanelRef.current.offsetHeight;
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('mouseup', handleMouseUp);
+    };
+
+    const handleMouseMove = (e) => {
+        if (isResizing.current) {
+            const offsetBottom = startY.current - e.clientY;
+            const newHeight = startHeight.current + offsetBottom;
+            controlPanelRef.current.style.height = `${newHeight}px`;
+            adjustEditorHeight();
+        }
+    };
+
+    const handleMouseUp = () => {
+        isResizing.current = false;
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleMouseUp);
+    };
+
+    const adjustEditorHeight = () => {
+        const editorContainerHeight = document.querySelector('.editor-container').clientHeight;
+        const controlPanelHeight = controlPanelRef.current ? controlPanelRef.current.clientHeight : 0;
+        const newEditorHeight = editorContainerHeight - controlPanelHeight - 20; // Adjust for margins/padding
+        editorRef.current.setSize(null, `${newEditorHeight}px`);
+    };
+
     return (
         <div className="editor-container">
             <div className="editor-header">
@@ -78,24 +120,27 @@ const Editor = ({ socketref, roomId, onCode }) => {
                     <option value="C">C</option>
                 </Form.Control>
                 <Button variant="primary" onClick={getData} className="run-button">
-                    <FaPlay /> Run
+                    <FaPlay />
                 </Button>
             </div>
             <textarea id="realtimeEditor"></textarea>
-            <Row className="control-panel">
-                <Col md={6}>
-                    <Form.Group className="mt-3">
-                        <Form.Label>Input</Form.Label>
-                        <Form.Control as="textarea" id="input" rows={5} />
-                    </Form.Group>
-                </Col>
-                <Col md={6}>
-                    <Form.Group className="mt-3">
-                        <Form.Label>Output</Form.Label>
-                        <Form.Control as="textarea" value={outputData} readOnly rows={5} className="output-field" />
-                    </Form.Group>
-                </Col>
-            </Row>
+            <div ref={controlPanelRef} className="control-panel">
+                <div className="resizer" onMouseDown={handleMouseDown}></div>
+                <Row className="flex-grow-1">
+                    <Col md={6}>
+                        <Form.Group className="mt-3">
+                            <Form.Label>Input</Form.Label>
+                            <Form.Control as="textarea" id="input" rows={5} />
+                        </Form.Group>
+                    </Col>
+                    <Col md={6}>
+                        <Form.Group className="mt-3">
+                            <Form.Label>Output</Form.Label>
+                            <Form.Control as="textarea" value={outputData} readOnly rows={5} className="output-field" />
+                        </Form.Group>
+                    </Col>
+                </Row>
+            </div>
         </div>
     );
 };
